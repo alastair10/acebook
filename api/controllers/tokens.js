@@ -15,6 +15,7 @@ const SessionsController = {
         console.log("auth error: passwords do not match")
         res.status(401).json({ message: "auth error" });
       } else {
+        // Creates token by calling JWT method in TokenGenerator model
         const token = await TokenGenerator.jsonwebtoken(user.id)
         res.status(201).json({ token: token, message: "OK" });
       }

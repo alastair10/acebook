@@ -7,6 +7,7 @@ const LogInForm = ({ navigate }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    // Sends post request to /tokens with email and password
     let response = await fetch( '/tokens', {
       method: 'post',
       headers: {
@@ -21,6 +22,8 @@ const LogInForm = ({ navigate }) => {
     } else {
       console.log("oop")
       let data = await response.json()
+
+      // Stores token in users local storage (if app is refreshed token is still accessible)
       window.localStorage.setItem("token", data.token)
       navigate('/posts');
     }
