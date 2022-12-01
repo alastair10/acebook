@@ -9,8 +9,20 @@ const mongoose = require("mongoose");
  * e.g. message: {type: String, required: true}
  */
 const PostSchema = new mongoose.Schema({
-  message: String
-});
+  message: {
+    type: String,
+    required: true
+  },
+  likes: {
+    type: Number,
+    default: 0,
+    required: false
+  },
+  image: {
+    type: String,
+    required: false
+  }
+}, {timestamps: true});
 
 /**
  * create an instance of the post schema
