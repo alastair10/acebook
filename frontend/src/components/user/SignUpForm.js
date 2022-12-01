@@ -17,6 +17,7 @@ const SignUpForm = ({ navigate }) => {
     })
       .then(response => {
         if(response.status === 201) {
+          // Opportunity to call a register hook that stores JWT and logs user in automatically
           navigate('/login')
         } else {
           navigate('/signup')
