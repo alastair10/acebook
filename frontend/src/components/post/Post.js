@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import './Post.css';
 
 const Post = ({post}) => {
-  const [details, setDeteils] = useState(false);
+  const [details, setDetails] = useState(false);
 
   /*in CSS we have 2 classes to button, and here we can 
-  *chanhe class every time then click the button
+  *change class every time then click the button
   */
   const btnClassName = details ? 'post-full-text' : 'post-less-text';
 
@@ -34,7 +34,7 @@ const Post = ({post}) => {
       </div>
       <div className='post-footer'>
         {/* .show button only if length more then 4 lines of text */}
-        {post.message.length > 390 && <button className='btn-details' onClick={() => setDeteils(prev => !prev)}>
+        {post.message.length > 390 && <button className='btn-details' onClick={() => setDetails(prev => !prev)}>
           {details ? 'Show less...' : 'Show more...'}
         </button>}
       </div>
