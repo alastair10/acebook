@@ -9,6 +9,10 @@ const mongoose = require("mongoose");
  * e.g. message: {type: String, required: true}
  */
 const PostSchema = new mongoose.Schema({
+  user_id: {
+    type: mongoose.Types.ObjectId, ref:"User",
+    required: true
+  },
   message: {
     type: String,
     required: true
