@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Post.css';
+import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 
 const Post = ({post}) => {
   const [details, setDetails] = useState(false);
@@ -9,8 +10,15 @@ const Post = ({post}) => {
   */
   const btnClassName = details ? 'post-full-text' : 'post-less-text';
 
+// postman for making posts
 
+// create a user email and password
+// returns user_id and token (e.g.something like 234t514tq4t.4tq4t3q4tqqt.q4tqwt3t4qwt)
 
+// then login with these details
+
+// POST /posts send req.body {message: ?}
+// returns {message: ok, token: token}
   return(
     <div className='post'>
       {/* post section start
@@ -24,7 +32,9 @@ const Post = ({post}) => {
         <img className='user-icon' alt="user-icon" src='./user-icon.png'/>
         <div className='post-header-info'>
           <p>User Name</p>
-          <label>01.01.2020 at 12:03</label>
+          {/* npm package used to format the date/time */}
+          <label>{formatDistanceToNow(new Date(post.createdAt), { addSuffix: true })}</label>
+
         </div>
       </div>
       <div className='post-body'>
