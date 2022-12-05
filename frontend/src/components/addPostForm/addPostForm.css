@@ -6,10 +6,12 @@
   border-radius: 25px;
 }
 
-.add-post-form textarea {
+.add-post-form input {
   width: 100%;
   border-radius: 25px;
   margin: 10px;
+  height: 40px;
+  border: 1px solid silver;
 }
 
 .add-post-form button {
@@ -20,7 +22,13 @@
  border: none;
 }
 
-.add-post-form::placeholder {
-  margin: 10px 0;
+.add-post-form input::placeholder {
+  font-size: 15px;
+  padding: 10px;
+}
+
+.add-post-form input{
+  font-size: 1.1em;
+  padding: 0 10px;
 }
 

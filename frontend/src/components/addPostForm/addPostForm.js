@@ -38,8 +38,8 @@ const AddPostForm = ({callback}) => {
   return (
     <div >
       <form className='add-post-form'>
-        <textarea placeholder='You message here...' value = {textarea} onChange={handleTextareaChange}></textarea>
-        <button type='submit' onClick={handleSubmit}>Create post</button>
+        <input type='text' placeholder='You message here...' value = {textarea} onChange={handleTextareaChange}></input>
+        <button type='submit' onClick={handleSubmit}>Create</button>
       </form>
     </div>
   )
