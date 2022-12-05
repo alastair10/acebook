@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Post from '../post/Post'
+import AddPostForm from '../addPostForm/addPostForm';
 import './Feed.css';
 
 const Feed = ({ navigate }) => {
@@ -37,10 +38,11 @@ const Feed = ({ navigate }) => {
     if(token) {
       return(
         <div className='container'>
-          <h2>Posts</h2>
+          <h2>Feed</h2>
             <button onClick={logout}>
               Logout
             </button>
+          <AddPostForm/>
           <div id='feed' role="feed">
               {posts.map(
                 (post) => ( <Post post={ post } key={ post._id } /> )
