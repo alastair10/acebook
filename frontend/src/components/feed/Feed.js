@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import Post from '../post/Post'
-import './Feed.css';
+import React, { useEffect, useState } from "react";
+import Post from "../post/Post";
+import "./Feed.css";
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
@@ -9,48 +9,45 @@ const Feed = ({ navigate }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
 
   useEffect(() => {
-
     // If there's a token, fetches posts with token for authorization
-    if(token) {
+    if (token) {
       fetch("/posts", {
         headers: {
-          'Authorization': `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       })
-        .then(response => response.json())
-        .then(async data => {
-          window.localStorage.setItem("token", data.token)
-          setToken(window.localStorage.getItem("token"))
+        .then((response) => response.json())
+        .then(async (data) => {
+          window.localStorage.setItem("token", data.token);
+          setToken(window.localStorage.getItem("token"));
           setPosts(data.posts);
-        })
+        });
     }
-  }, [])
-    
+  }, []);
 
   // Log out method removes token from user's local storage
   const logout = () => {
-    window.localStorage.removeItem("token")
-    navigate('/login')
-  }
-  
+    window.localStorage.removeItem("token");
+    window.localStorage.removeItem("user_id");
+    navigate("/login");
+  };
+
   // Component block for feed of posts if there's a token (otherwise redirects to /signin)
-    if(token) {
-      return(
-        <div className='container'>
-          <h2>Posts</h2>
-            <button onClick={logout}>
-              Logout
-            </button>
-          <div id='feed' role="feed">
-              {posts.map(
-                (post) => ( <Post post={ post } key={ post._id } /> )
-              )}
-          </div>
+  if (token) {
+    return (
+      <div className="container">
+        <h2>Posts</h2>
+        <button onClick={logout}>Logout</button>
+        <div id="feed" role="feed">
+          {posts.map((post) => (
+            <Post post={post} key={post._id} />
+          ))}
         </div>
-      )
-    } else {
-      navigate('/signin')
-    }
-}
+      </div>
+    );
+  } else {
+    navigate("/signin");
+  }
+};
 
 export default Feed;
