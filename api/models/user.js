@@ -10,6 +10,15 @@ const mongoose = require("mongoose");
 const UserSchema = new mongoose.Schema({
   email: { type: String, required: true },
   password: { type: String, required: true },
+  full_name: { type: String, required: true },
+  // bio: { type: String, required: true },
+  // status: { type: String, required: true },
+  // // profile_pic: { type: String, required: true },
+  // birthday: { type: Date, required: true },
+  // hometown: { type: String, required: true },
+  // occupation: { type: String, required: true },
+  // joined_date: { type: Date, required: true },
+  // relationship_status: { type: String, required: true }
 });
 
 /**
