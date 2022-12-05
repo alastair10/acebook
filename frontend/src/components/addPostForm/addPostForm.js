@@ -17,7 +17,7 @@ const AddPostForm = ({callback}) => {
         'Authorization': "Bearer " + window.localStorage.getItem('token'),
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ user_id:'6389e6036d9fbb7c56778b76', message: textarea})
+      body: JSON.stringify({ user_id: window.localStorage.getItem('user_id'), message: textarea})
     })
 
 
