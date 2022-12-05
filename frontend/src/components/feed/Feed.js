@@ -5,14 +5,14 @@ import './Feed.css';
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
-
+  const [isUndate, setIsUpdate] = useState(false)
   // Hook for token variable, retrieves token from users local storage
   const [token, setToken] = useState(window.localStorage.getItem("token"));
 
   useEffect(() => {
 
     // If there's a token, fetches posts with token for authorization
-    if(token) {
+    if(token && (isUndate || posts.length === 0)) {
       fetch("/posts", {
         headers: {
           'Authorization': `Bearer ${token}`
@@ -22,10 +22,11 @@ const Feed = ({ navigate }) => {
         .then(async data => {
           window.localStorage.setItem("token", data.token)
           setToken(window.localStorage.getItem("token"))
-          setPosts(data.posts);
+          setPosts(data.posts.reverse());
+          setIsUpdate(false)
         })
     }
-  }, [])
+  }, [token, posts, isUndate])
     
 
   // Log out method removes token from user's local storage
@@ -42,7 +43,7 @@ const Feed = ({ navigate }) => {
             <button onClick={logout}>
               Logout
             </button>
-          <AddPostForm/>
+          <AddPostForm callback = {(value) => {setIsUpdate(value)}}/>
           <div id='feed' role="feed">
               {posts.map(
                 (post) => ( <Post post={ post } key={ post._id } /> )

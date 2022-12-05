@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './addPostForm.css';
 
-const AddPostForm = () => {
+const AddPostForm = ({callback}) => {
   const [textarea, setTextarea] = useState("");
   
   const handleTextareaChange = (event) => {
@@ -30,6 +30,7 @@ const AddPostForm = () => {
     } else {
       console.log("post added");
       setTextarea('');
+      callback(true);
     }
   }
 }
