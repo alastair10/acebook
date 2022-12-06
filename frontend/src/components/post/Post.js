@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Post.css';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 
-const Post = ({ post }) => {
+const Post = ({ post, callback }) => {
   const [details, setDetails] = useState(false);
   // const [likes, toggleLikes] = useState(false);
   /*in CSS we have 2 classes to button, and here we can
@@ -27,7 +27,7 @@ const Post = ({ post }) => {
 
     if (user_id) {
       console.log(post._id);
-      await fetch(`/posts/${post._id}`, {
+      let response = await fetch(`/posts/${post._id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -35,6 +35,14 @@ const Post = ({ post }) => {
         },
         body: JSON.stringify({ likes: user_id }),
       });
+      const data = await response.json();
+      if (response.status !== 202) {
+        // const data = await response.json()
+        console.log(data.error);
+        // console.log("error with post adding")
+      } else {
+        callback(true);
+      }
     }
   };
 
