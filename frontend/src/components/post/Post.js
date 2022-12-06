@@ -4,8 +4,7 @@ import formatDistanceToNow from "date-fns/formatDistanceToNow";
 
 const Post = ({ post }) => {
   const [details, setDetails] = useState(false);
-  // const [likes, setLikes] = useState(post.likes);
-  // const [token, setToken] = useState(window.localStorage.getItem("token"));
+  // const [likes, toggleLikes] = useState(false);
   /*in CSS we have 2 classes to button, and here we can
    *change class every time then click the button
    */
@@ -41,8 +40,10 @@ const Post = ({ post }) => {
   //       })
   //   }
   // }, []);
-  console.log(post.likes)
-  console.log(post.message)
+
+
+
+
   return (
     <div className="post">
       {/* post section start
@@ -74,7 +75,14 @@ const Post = ({ post }) => {
       </div>
       <div className="post-footer">
         <span>Likes: {post.likes.length} </span>
-        <button className="btn-details">Like</button>
+        <button 
+          className="btn-details"
+          onClick={() => handleClick}
+          > 
+          
+          
+          Like</button>
+      
         {/* .show button only if length more then 4 lines of text */}
         {post.message.length > 390 && (
           <button

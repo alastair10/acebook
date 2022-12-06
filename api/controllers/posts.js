@@ -42,7 +42,7 @@ const PostsController = {
   Update: async (req, res) => {
     const data = req.body;
     const { id } = req.params;
-    const post = await Post.findByIdAndUpdate(id, data);
+    const post = await Post.findByIdAndUpdate({"_id": id}, {$addToSet: { likes: data.likes} }, {new: true});  
     const token = await TokenGenerator.jsonwebtoken(req.user_id);
     res.status(202).json({ message: "OK", token: token, post: post });
   },
