@@ -41,34 +41,18 @@ const PostsController = {
 
   Update: async (req, res) => {
     const data = req.body;
-
     const { id } = req.params;
-    console.log(Post)
-    const post = await Post.findByIdAndUpdate(id, data)
-      console.log(post)
-      const token = await TokenGenerator.jsonwebtoken(req.user_id);
-      console.log(res.body)
-      res.status(202).json({ message: "OK", token: token, post: post });
-    },
+    const post = await Post.findByIdAndUpdate(id, data);
+    const token = await TokenGenerator.jsonwebtoken(req.user_id);
+    res.status(202).json({ message: "OK", token: token, post: post });
+  },
 
-    Get: async (req, res) => {
-      // const post = new Post(req.body);
-  
-      const { id } = req.params;
-      console.log(Post)
-      const post = await Post.findById(id)
-        console.log(post)
-        const token = await TokenGenerator.jsonwebtoken(req.user_id);
-        console.log(res.body)
-        res.status(202).json({ message: "OK", token: token, post: post });
-      }
-    // Post.findByIdAndUpdate(id, post, async (err) => {
-    //   if (err) {
-    //     throw err;
-    //   }
-    //   const token = await TokenGenerator.jsonwebtoken(req.user_id);
-    //   res.status(202).json({ message: "OK", token: token });
-    // });
+  Get: async (req, res) => {
+    const { id } = req.params;
+    const post = await Post.findById(id);
+    const token = await TokenGenerator.jsonwebtoken(req.user_id);
+    res.status(202).json({ message: "OK", token: token, post: post });
   }
+};
 
 module.exports = PostsController;

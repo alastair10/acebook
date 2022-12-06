@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Post.css";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 
 const Post = ({ post }) => {
   const [details, setDetails] = useState(false);
-
+  // const [likes, setLikes] = useState(post.likes);
+  // const [token, setToken] = useState(window.localStorage.getItem("token"));
   /*in CSS we have 2 classes to button, and here we can
    *change class every time then click the button
    */
@@ -19,6 +20,29 @@ const Post = ({ post }) => {
 
   // POST /posts send req.body {message: ?}
   // returns {message: ok, token: token}
+
+  // useEffect(() => {
+  //   // If there's a token, fetches posts with token for authorization
+  //   if (token) {
+  //     fetch( '/posts', {
+  //       method: 'post',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify({ user_id: user_id, post_id: post._id })
+  //     })
+  //       .then(response => {
+  //         if(response.status === 201) {
+  //           // Opportunity to call a register hook that stores JWT and logs user in automatically
+  //           navigate('/login')
+  //         } else {
+  //           navigate('/signup')
+  //         }
+  //       })
+  //   }
+  // }, []);
+  console.log(post.likes)
+  console.log(post.message)
   return (
     <div className="post">
       {/* post section start
@@ -49,6 +73,8 @@ const Post = ({ post }) => {
         </article>
       </div>
       <div className="post-footer">
+        <span>Likes: {post.likes.length}</span>
+        <button className="btn-details">Add Like</button>
         {/* .show button only if length more then 4 lines of text */}
         {post.message.length > 390 && (
           <button
