@@ -17,9 +17,8 @@ const UserSchema = new mongoose.Schema({
   birthday: { type: Date, required: true },
   hometown: { type: String, required: true },
   occupation: { type: String, required: true },
-  joined_date: { type: Date, required: true },
   relationship_status: { type: String, required: true }
-});
+}, {timestamps: true });
 
 /**
  * create an instance of the user schema
