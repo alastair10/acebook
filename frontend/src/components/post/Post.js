@@ -73,7 +73,7 @@ const Post = ({ post }) => {
         </article>
       </div>
       <div className="post-footer">
-        <span>Likes: {post.likes.length}</span>
+        <span>Likes: {post.likes.length} </span>
         <button className="btn-details">Add Like</button>
         {/* .show button only if length more then 4 lines of text */}
         {post.message.length > 390 && (
