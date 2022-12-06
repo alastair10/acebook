@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import "./Post.css";
-import formatDistanceToNow from "date-fns/formatDistanceToNow";
+import React, { useState } from 'react';
+import './Post.css';
+import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 
 const Post = ({ post }) => {
   const [details, setDetails] = useState(false);
@@ -8,7 +8,7 @@ const Post = ({ post }) => {
   /*in CSS we have 2 classes to button, and here we can
    *change class every time then click the button
    */
-  const btnClassName = details ? "post-full-text" : "post-less-text";
+  const btnClassName = details ? 'post-full-text' : 'post-less-text';
 
   // postman for making posts
 
@@ -20,32 +20,26 @@ const Post = ({ post }) => {
   // POST /posts send req.body {message: ?}
   // returns {message: ok, token: token}
 
-  // useEffect(() => {
-  //   // If there's a token, fetches posts with token for authorization
-  //   if (token) {
-  //     fetch( '/posts', {
-  //       method: 'post',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify({ user_id: user_id, post_id: post._id })
-  //     })
-  //       .then(response => {
-  //         if(response.status === 201) {
-  //           // Opportunity to call a register hook that stores JWT and logs user in automatically
-  //           navigate('/login')
-  //         } else {
-  //           navigate('/signup')
-  //         }
-  //       })
-  //   }
-  // }, []);
+  const handleClick = async () => {
+    // If there's a token, fetches posts with token for authorization
+    const user_id = window.localStorage.getItem('user_id');
+    const token = window.localStorage.getItem('token');
 
-
-
+    if (user_id) {
+      console.log(post._id);
+      await fetch(`/posts/${post._id}`, {
+        method: 'patch',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ likes: user_id }),
+      });
+    }
+  };
 
   return (
-    <div className="post">
+    <div className='post'>
       {/* post section start
        * each post inclide:
        * header: user icon, user name and timestamp,
@@ -53,14 +47,14 @@ const Post = ({ post }) => {
        * footer: likes and comments buttons
        * comments block after footer
        */}
-      <div className="post-header">
+      <div className='post-header'>
         <img
-          className="user-icon"
-          alt="user-icon"
-          src="./avatars/avatar_1.png"
+          className='user-icon'
+          alt='user-icon'
+          src='./avatars/avatar_1.png'
         />
         {/* <img className='user-icon' alt="user-icon" src='./user-icon.png'/> */}
-        <div className="post-header-info">
+        <div className='post-header-info'>
           <p>User Name</p>
           {/* npm package used to format the date/time */}
           <label>
@@ -68,28 +62,24 @@ const Post = ({ post }) => {
           </label>
         </div>
       </div>
-      <div className="post-body">
-        <article className={btnClassName} data-cy="post" key={post._id}>
+      <div className='post-body'>
+        <article className={btnClassName} data-cy='post' key={post._id}>
           {post.message}
         </article>
       </div>
-      <div className="post-footer">
+      <div className='post-footer'>
         <span>Likes: {post.likes.length} </span>
-        <button 
-          className="btn-details"
-          onClick={() => handleClick}
-          > 
-          
-          
-          Like</button>
-      
+        <button className='btn-details' onClick={handleClick}>
+          Like
+        </button>
+
         {/* .show button only if length more then 4 lines of text */}
         {post.message.length > 390 && (
           <button
-            className="btn-details"
+            className='btn-details'
             onClick={() => setDetails((prev) => !prev)}
           >
-            {details ? "Show less..." : "Show more..."}
+            {details ? 'Show less...' : 'Show more...'}
           </button>
         )}
       </div>

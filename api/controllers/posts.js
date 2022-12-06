@@ -41,8 +41,10 @@ const PostsController = {
   // WIP - update to accommodate comments
   Update: async (req, res) => {
     const data = req.body;
+    // the post id
     const { id } = req.params;
-    const post = await Post.findByIdAndUpdate({"_id": id}, {$addToSet: { likes: data.likes} }, {new: true});  
+    const post = await Post.findByIdAndUpdate({"_id": id}, {$addToSet: { likes: data.likes} }, {new: true});
+    // TODO: error: if same then post will return the same info
     const token = await TokenGenerator.jsonwebtoken(req.user_id);
     res.status(202).json({ message: "OK", token: token, post: post });
   },
