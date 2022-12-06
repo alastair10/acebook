@@ -28,7 +28,7 @@ const Post = ({ post }) => {
     if (user_id) {
       console.log(post._id);
       await fetch(`/posts/${post._id}`, {
-        method: 'patch',
+        method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
