@@ -38,7 +38,7 @@ const PostsController = {
       res.status(201).json({ message: "OK", token: token });
     });
   },
-
+  // WIP - update to accommodate comments
   Update: async (req, res) => {
     const data = req.body;
     const { id } = req.params;
@@ -47,6 +47,7 @@ const PostsController = {
     res.status(202).json({ message: "OK", token: token, post: post });
   },
 
+  // finds a single post
   Get: async (req, res) => {
     const { id } = req.params;
     const post = await Post.findById(id);
