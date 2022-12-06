@@ -27,7 +27,6 @@ const UsersController = {
     const { id } = req.params;
     const user = await User.findById(id);
     const token = await TokenGenerator.jsonwebtoken(req.user_id);
-    console.log(user)
     res.status(200).json({ message: "OK", token: token, full_name: user.full_name, bio: user.bio, birthday: user.birthday, hometown: user.hometown, occupation: user.occupation, relationship_status: user.relationship_status, joined: user.createdAt
   })
   }
