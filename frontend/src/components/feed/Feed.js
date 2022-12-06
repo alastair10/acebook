@@ -35,7 +35,7 @@ const Feed = ({ navigate }) => {
         <AddPostForm callback = {(value) => {setIsUpdated(value)}}/>
         <div id="feed" role="feed">
           {posts.map((post) => (
-            <Post post={post} key={post._id} />
+            <Post post={post} key={post._id} callback = {(value) => {setIsUpdated(value)}} />
           ))}
         </div>
       </div>
