@@ -9,5 +9,6 @@ const UsersController = require("../controllers/users");
 
 // route equivalent to POST /users/
 router.post("/", UsersController.Create);
+router.get("/:id", UsersController.Get);
 
 module.exports = router;
