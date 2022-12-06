@@ -19,7 +19,7 @@ const SignUpForm = ({ navigate }) => {
     event.preventDefault();
 
     fetch( '/users', {
-      method: 'post',
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },

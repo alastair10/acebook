@@ -41,7 +41,7 @@ const Feed = ({ navigate }) => {
       </div>
     );
   } else {
-    navigate("/signin");
+    navigate("/login");
   }
 };
 
