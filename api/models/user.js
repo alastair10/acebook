@@ -12,7 +12,6 @@ const UserSchema = new mongoose.Schema({
   password: { type: String, required: true },
   full_name: { type: String, required: true },
   bio: { type: String, required: true },
-  // status: { type: String, required: true },
   profile_pic: { type: String, required: true },
   birthday: { type: Date, required: true },
   hometown: { type: String, required: true },
