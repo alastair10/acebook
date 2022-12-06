@@ -1,0 +1,38 @@
+.container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 10px;
+}
+
+.sign-up-form {
+  display: flex;
+  flex-direction: column;
+  min-width: 20vw;
+  width: 420px;
+}
+
+.sign-up-form label {
+  margin: 5px 0;
+  
+}
+
+.img-container {
+  width: 420px;
+}
+
+.form-img {
+  height: 60px;
+  width: 60px;
+}
+
+.img-container input {
+  position: absolute;
+  margin: 43px -37px;
+}
+
+.img-container-hide {
+  display: none;
+}
+
+
