@@ -26,23 +26,12 @@ const Feed = ({ navigate }) => {
         })
     }
   }, [token, posts, isUndate])
-    
-
-
-  // Log out method removes token from user's local storage
-  const logout = () => {
-    window.localStorage.removeItem("token");
-    window.localStorage.removeItem("user_id");
-    navigate("/login");
-  };
 
   // Component block for feed of posts if there's a token (otherwise redirects to /signin)
-
   if (token) {
     return (
       <div className="container">
         <h2>Feed</h2>
-        <button onClick={logout}>Logout</button>
         <AddPostForm callback = {(value) => {setIsUpdate(value)}}/>
         <div id="feed" role="feed">
           {posts.map((post) => (
