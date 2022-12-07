@@ -5,13 +5,13 @@ import '../feed/Feed.css';
 
 const ProfileFeed = ({ navigate, user_id, userName }) => {
   const [posts, setPosts] = useState([]);
-  const [isUpdated, setIsUpdated] = useState(false)
+  const [isUpdated, setIsUpdated] = useState(true)
   // Hook for token variable, retrieves token from users local storage
   const [token, setToken] = useState(window.localStorage.getItem("token"));
 
   useEffect(() => {
     // If there's a token, fetches posts with token for authorization
-    if(token && (isUpdated || posts.length === 0)) {
+    if(token && (isUpdated)) {
       fetch("/posts", {
         headers: {
           Authorization: `Bearer ${token}`,

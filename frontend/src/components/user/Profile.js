@@ -15,26 +15,25 @@ const Profile = ({ navigate }) => {
   const { id } = useParams();
 
   useEffect(() => {
-    fetch("/users/" + id, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    }).then(response => response.json())
-      .then((data) => {
-        setUserName(data.full_name)
-        setUserHomeTown(data.hometown)
-        setUserBio(data.bio)
-        setUserBirthday(data.birthday)
-        setUserRelationshipStatus(data.relationship_status)
-        setUserOccupation(data.occupation)
-        setUserJoinedDate(data.joined)
-        window.localStorage.setItem("token", data.token)
-        setToken(window.localStorage.getItem("token"))
-      })
-  })
-
-
-
+    if (id) {
+      fetch("/users/" + id, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }).then(response => response.json())
+        .then((data) => {
+          setUserName(data.full_name)
+          setUserHomeTown(data.hometown)
+          setUserBio(data.bio)
+          setUserBirthday(data.birthday)
+          setUserRelationshipStatus(data.relationship_status)
+          setUserOccupation(data.occupation)
+          setUserJoinedDate(data.joined)
+          window.localStorage.setItem("token", data.token)
+          setToken(window.localStorage.getItem("token"))
+        })
+    }
+  }, [id])
 
   return (
     <div className="container">
@@ -49,7 +48,6 @@ const Profile = ({ navigate }) => {
     </div>
   );
 } 
-
 
 
 export default Profile;
