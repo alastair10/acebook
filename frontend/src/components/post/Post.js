@@ -51,7 +51,7 @@ const Post = ({ post, callback }) => {
     <div className="post">
       {/* post section start
        * each post inclide:
-       * header: user icon, user name and timestamp,
+       * header: user icon, user name (w/link to profile) and timestamp,
        * body: article with post text,
        * footer: likes and comments buttons
        * comments block after footer
