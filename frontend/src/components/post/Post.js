@@ -62,8 +62,7 @@ const Post = ({ post, callback }) => {
           alt='user-icon'
           src= {post.user_id.profile_pic}
         />
-        
-        {/* <img className='user-icon' alt="user-icon" src='./user-icon.png'/> */}
+
         <div className="post-header-info">
           <Link className="Link" to={"/users/" + post.user_id._id}>
             {post.user_id.full_name}
