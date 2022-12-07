@@ -1,31 +1,39 @@
-import { Link } from 'react-router-dom';
-import React from 'react';
-import './Navbar.css';
+import { Link } from "react-router-dom";
+import React from "react";
+import "./Navbar.css";
 
 const navbar = ({ navigate }) => {
   // Log out method removes token from user's local storage
   const signout = () => {
-    window.localStorage.removeItem('token');
-    window.localStorage.removeItem('user_id');
-    navigate('/login');
+    window.localStorage.removeItem("token");
+    window.localStorage.removeItem("user_id");
+    navigate("/login");
   };
 
-  const isLoggedIn = window.localStorage.getItem('user_id');
+  const user_id = window.localStorage.getItem("user_id");
 
   let buttons;
-  if (isLoggedIn) {
+  if (user_id) {
     buttons = (
-      <button onClick={signout} className='Link'>
-        Sign out
-      </button>
+      <>
+        <Link className="link" to={`users/${user_id}`}>
+          Profile
+        </Link>
+        <Link className="link" to="/posts">
+          Feed
+        </Link>
+        <button className="link" onClick={signout}>
+          Sign out
+        </button>
+      </>
     );
   } else {
     buttons = (
       <>
-        <Link className='Link' to='/signup'>
+        <Link className="link" to="/signup">
           Sign up
         </Link>
-        <Link className='Link' to='/login'>
+        <Link className="link" to="/login">
           Sign in
         </Link>
       </>
@@ -33,7 +41,7 @@ const navbar = ({ navigate }) => {
   }
 
   return (
-    <nav className='Navbar'>
+    <nav className="navbar">
       <div>{buttons}</div>
     </nav>
   );
