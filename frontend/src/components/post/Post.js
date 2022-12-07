@@ -64,7 +64,7 @@ const Post = ({ post, callback }) => {
         />
         {/* <img className='user-icon' alt="user-icon" src='./user-icon.png'/> */}
         <div className="post-header-info">
-          <Link className="Link" to="/users/${}">
+          <Link className="Link" to={"/users/" + post.user_id}>
             User name
           </Link>
           {/* npm package used to format the date/time */}
