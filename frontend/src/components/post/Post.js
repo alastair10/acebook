@@ -58,11 +58,10 @@ const Post = ({ post, callback }) => {
        */}
       <div className="post-header">
         <img
-          className="user-icon"
-          alt="user-icon"
-          src="./avatars/avatar_1.png"
+          className='user-icon'
+          alt='user-icon'
+          src='../avatars/avatar_1.png'
         />
-        {/* <img className='user-icon' alt="user-icon" src='./user-icon.png'/> */}
         <div className="post-header-info">
           <Link className="Link" to={"/users/" + post.user_id}>
             User name
