@@ -47,7 +47,7 @@ const SignUpForm = ({ navigate }) => {
 
   const avatarsList = (num) => {
     let avatars = [];
-    const path = './avatars/';
+    const path = '../avatars/';
     for (let i = 1; i < num; i++) {
       avatars.push(path + 'avatar_' + i + '.png')
     }
