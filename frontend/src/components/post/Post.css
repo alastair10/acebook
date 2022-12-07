@@ -1,3 +1,11 @@
+.Link {
+  color: #3d587a;
+  font-size: 1.1em;
+  margin: 0 0 5px;
+  padding: 0px;
+  border: 0;
+}
+
 .post {
   min-width: 350px;
   width: 50vw;
@@ -66,6 +74,8 @@
   padding: 5px 25px;
   display: flex;
   align-items: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 0.80em;
 }
 
 .btn-details {

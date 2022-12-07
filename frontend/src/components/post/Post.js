@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./Post.css";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
+import { Link } from "react-router-dom";
 
 const Post = ({ post, callback }) => {
   const user_id = window.localStorage.getItem("user_id");
@@ -9,10 +10,11 @@ const Post = ({ post, callback }) => {
   const [details, setDetails] = useState(false);
   const isPostLikedByUser = post.likes.includes(user_id);
   const [isLiked, toggleIsLiked] = useState(isPostLikedByUser);
+  const [comments, setComment] = useState("");
 
   const btnClassName = details ? "post-full-text" : "post-less-text";
 
-  const handleClick = async () => {
+  const handleLikeToggle = async () => {
     toggleIsLiked((prevState) => !prevState);
 
     if (user_id) {
@@ -22,29 +24,53 @@ const Post = ({ post, callback }) => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ isLiked, user_id }),
+        body: JSON.stringify({ type: "likes", isLiked, user_id }),
       });
       const data = await response.json();
       if (response.status !== 202) {
-        // const data = await response.json()
         console.log(data.error);
-        // console.log("error with post adding")
       } else {
         callback(true);
       }
     }
   };
 
+  const handleCommentSubmit = async () => {
+    if (user_id) {
+      let response = await fetch(`/posts/${post._id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ type: "comments", comments })
+      });
+      const data = await response.json();
+      if (response.status !== 202) {
+        console.log(data.error);
+      } else {
+        callback(true);
+      }
+    }
+  };
+
+  const handleCommentChange = (event) => {
+    setComment(event.target.value)
+  }
+
   return (
     <div className="post">
       <div className="post-header">
         <img
-          className="user-icon"
-          alt="user-icon"
-          src="./avatars/avatar_1.png"
+          className='user-icon'
+          alt='user-icon'
+          src= {post.user_id.profile_pic}
         />
+
         <div className="post-header-info">
-          <p>User Name</p>
+          <Link className="Link" to={"/users/" + post.user_id._id}>
+            {post.user_id.full_name}
+          </Link>
           <label>
             {formatDistanceToNow(new Date(post.createdAt), { addSuffix: true })}
           </label>
@@ -56,7 +82,7 @@ const Post = ({ post, callback }) => {
         </article>
       </div>
       <div className="post-footer">
-        <button className="btn-details" onClick={handleClick}>
+        <button className="btn-details" onClick={handleLikeToggle}>
           {isLiked ? (
             <img
               className="img_likes"
@@ -71,8 +97,7 @@ const Post = ({ post, callback }) => {
             />
           )}
         </button>
-        <span>{post.likes.length} </span>
-
+        <span>{post.likes.length}</span>
         {post.message.length > 390 && (
           <button
             className="btn-details"
@@ -81,6 +106,25 @@ const Post = ({ post, callback }) => {
             {details ? "Show less..." : "Show more..."}
           </button>
         )}
+      </div>
+
+      <div>
+        <form className='post-body' onSubmit={handleCommentSubmit}>
+          <input
+            placeholder="Post a comment!"
+            id="comments"
+            type="text"
+            value={comments}
+            onChange={handleCommentChange}
+          />
+          <input id="submit" type="submit" value="Comment" />
+        </form>
+      </div>
+
+      <div className='post-body'>
+        <article>
+          {post.comments.map((item) => <div>{item}</div>)}
+        </article>
       </div>
     </div>
   );
