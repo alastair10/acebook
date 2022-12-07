@@ -54,7 +54,7 @@ const LogInForm = ({ navigate }) => {
         value={password}
         onChange={handlePasswordChange}
       />
-      <input role="submit-button" id="submit" type="submit" value="Submit" />
+      <input id="submit" type="submit" value="Submit" />
     </form>
   );
 };
