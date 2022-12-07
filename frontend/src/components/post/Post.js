@@ -3,16 +3,17 @@ import "./Post.css";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 
 const Post = ({ post, callback }) => {
+  const user_id = window.localStorage.getItem("user_id");
+  const token = window.localStorage.getItem("token");
+
   const [details, setDetails] = useState(false);
-  const [isLiked, toggleIsLiked] = useState(false);
+  const isPostLikedByUser = post.likes.includes(user_id);
+  const [isLiked, toggleIsLiked] = useState(isPostLikedByUser);
 
   const btnClassName = details ? "post-full-text" : "post-less-text";
 
   const handleClick = async () => {
-    toggleIsLiked((prevState => !prevState));
-
-    const user_id = window.localStorage.getItem("user_id");
-    const token = window.localStorage.getItem("token");
+    toggleIsLiked((prevState) => !prevState);
 
     if (user_id) {
       let response = await fetch(`/posts/${post._id}`, {
