@@ -1,9 +1,18 @@
-li {
-  display: inline-block;
-  text-decoration: none;
+button {
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  overflow: visible;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  line-height: normal;
 }
 
-a{
+button,
+a,
+.link {
   text-decoration: none;
   color: black;
   display: inline-block;
@@ -17,12 +26,13 @@ a{
   margin-left: 10px;
 }
 
-a:hover{
+button:hover,
+a:hover {
   color: rgb(116, 116, 116);
   text-decoration: underline;
 }
 
-.Navbar{
+.Navbar {
   width: 100vw;
   background-color: rgb(228, 228, 228);
   display: flex;
