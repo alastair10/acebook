@@ -21,7 +21,7 @@ const Post = ({ post, callback }) => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ likes: user_id }),
+        body: JSON.stringify({ isLiked, user_id }),
       });
       const data = await response.json();
       if (response.status !== 202) {
