@@ -32,7 +32,7 @@ a:hover {
   text-decoration: underline;
 }
 
-.Navbar {
+.navbar {
   width: 100vw;
   background-color: rgb(228, 228, 228);
   display: flex;

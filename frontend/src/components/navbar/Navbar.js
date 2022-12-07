@@ -16,13 +16,13 @@ const navbar = ({ navigate }) => {
   if (user_id) {
     buttons = (
       <>
-        <Link className="Link" to={`users/${user_id}`}>
+        <Link className="link" to={`users/${user_id}`}>
           Profile
         </Link>
-        <Link className="Link" to="/posts">
+        <Link className="link" to="/posts">
           Feed
         </Link>
-        <button className="Link" onClick={signout}>
+        <button className="link" onClick={signout}>
           Sign out
         </button>
       </>
@@ -30,10 +30,10 @@ const navbar = ({ navigate }) => {
   } else {
     buttons = (
       <>
-        <Link className="Link" to="/signup">
+        <Link className="link" to="/signup">
           Sign up
         </Link>
-        <Link className="Link" to="/login">
+        <Link className="link" to="/login">
           Sign in
         </Link>
       </>
@@ -41,7 +41,7 @@ const navbar = ({ navigate }) => {
   }
 
   return (
-    <nav className="Navbar">
+    <nav className="navbar">
       <div>{buttons}</div>
     </nav>
   );
