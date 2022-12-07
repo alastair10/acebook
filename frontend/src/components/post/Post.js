@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 
 const Post = ({ post, callback }) => {
   const [details, setDetails] = useState(false);
+  const [comments, setComment] = useState("");
   // const [likes, toggleLikes] = useState(false);
   /*in CSS we have 2 classes to button, and here we can
    *change class every time then click the button
@@ -34,7 +35,7 @@ const Post = ({ post, callback }) => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ likes: user_id }),
+        body: JSON.stringify({ likes: user_id, comments: comments })
       });
       const data = await response.json();
       if (response.status !== 202) {
@@ -46,6 +47,10 @@ const Post = ({ post, callback }) => {
       }
     }
   };
+
+  const handleCommentChange = (event) => {
+    setComment(event.target.value)
+  }
 
   return (
     <div className="post">
@@ -83,6 +88,11 @@ const Post = ({ post, callback }) => {
         <button className="btn-details" onClick={handleClick}>
           Like
         </button>
+        <br></br>
+        <span>Comments: {post.comments.length} </span>
+        {/* <button className='btn-details' onClick={handleClick}>
+          View Comments
+        </button> */}
 
         {/* .show button only if length more then 4 lines of text */}
         {post.message.length > 390 && (
@@ -93,6 +103,25 @@ const Post = ({ post, callback }) => {
             {details ? "Show less..." : "Show more..."}
           </button>
         )}
+      </div>
+
+      <div>
+        <form className='post-body' onSubmit={handleClick}>
+          <input
+            placeholder="Post a comment!"
+            id="comments"
+            type="text"
+            value={comments}
+            onChange={handleCommentChange}
+          />
+          <input id="submit" type="submit" value="Comment" />
+        </form>
+      </div>
+
+      <div className='post-body'>
+        <article>
+          {post.comments.map((item) => <div>{item}</div>)}
+        </article>
       </div>
     </div>
   );
