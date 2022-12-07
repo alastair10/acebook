@@ -1,5 +1,6 @@
 const Post = require("../models/post");
 const TokenGenerator = require("../models/token_generator");
+const { post } = require("../routes/posts");
 
 /**
  * Actions for Posts
@@ -15,7 +16,7 @@ const PostsController = {
       }
       // use token model (imported above from models)
       // create a JWT by passing the request sender's user id
-      const token = await TokenGenerator.jsonwebtoken(req.user_id)
+      const token = await TokenGenerator.jsonwebtoken(req.user_id);
       // response is successful
       // currently only sends back json object with following details
       res.status(200).json({ posts: posts, token: token });
@@ -31,12 +32,30 @@ const PostsController = {
       }
 
       // create a JWT by passing the request sender's user id
-      const token = await TokenGenerator.jsonwebtoken(req.user_id)
+      const token = await TokenGenerator.jsonwebtoken(req.user_id);
       // response is successful created (notice 201)
       // currently only sends back json object with following details
-      res.status(201).json({ message: 'OK', token: token });
+      res.status(201).json({ message: "OK", token: token });
     });
   },
+  // WIP - update to accommodate comments
+  Update: async (req, res) => {
+    const data = req.body;
+    // the post id
+    const { id } = req.params;
+    const post = await Post.findByIdAndUpdate({"_id": id}, {$addToSet: { likes: data.likes} }, {new: true});
+    // TODO: error: if same then post will return the same info
+    const token = await TokenGenerator.jsonwebtoken(req.user_id);
+    res.status(202).json({ message: "OK", token: token, post: post });
+  },
+
+  // finds a single post
+  Get: async (req, res) => {
+    const { id } = req.params;
+    const post = await Post.findById(id);
+    const token = await TokenGenerator.jsonwebtoken(req.user_id);
+    res.status(200).json({ message: "OK", token: token, post: post });
+  }
 };
 
 module.exports = PostsController;
