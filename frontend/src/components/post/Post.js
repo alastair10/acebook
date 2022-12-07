@@ -59,11 +59,12 @@ const Post = ({ post, callback }) => {
         <img
           className='user-icon'
           alt='user-icon'
-          src='./avatars/avatar_1.png'
+          src= {post.user_id.profile_pic}
         />
+        
         {/* <img className='user-icon' alt="user-icon" src='./user-icon.png'/> */}
         <div className='post-header-info'>
-          <p>User Name</p>
+          <p>{post.user_id.full_name}</p>
           {/* npm package used to format the date/time */}
           <label>
             {formatDistanceToNow(new Date(post.createdAt), { addSuffix: true })}

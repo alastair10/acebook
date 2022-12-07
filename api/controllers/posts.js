@@ -1,4 +1,5 @@
 const Post = require("../models/post");
+const User = require('../models/user')
 const TokenGenerator = require("../models/token_generator");
 const { post } = require("../routes/posts");
 
@@ -10,17 +11,19 @@ const { post } = require("../routes/posts");
 const PostsController = {
   Index: (req, res) => {
     // use the post schema with find query **What is sent?**
-    Post.find(async (err, posts) => {
-      if (err) {
-        throw err;
-      }
-      // use token model (imported above from models)
-      // create a JWT by passing the request sender's user id
-      const token = await TokenGenerator.jsonwebtoken(req.user_id);
-      // response is successful
-      // currently only sends back json object with following details
-      res.status(200).json({ posts: posts, token: token });
-    });
+    Post.find({})
+      .populate({ path :'user_id', select : 'full_name profile_pic'})
+      .exec(async (err, posts) => {
+        if (err) {
+          throw err;
+        }
+        // use token model (imported above from models)
+        // create a JWT by passing the request sender's user id
+        const token = await TokenGenerator.jsonwebtoken(req.user_id);
+        // response is successful
+        // currently only sends back json object with following details
+        res.status(200).json({ posts: posts, token: token });
+      });
   },
   Create: (req, res) => {
     // create a new instance of a post using information from the request
