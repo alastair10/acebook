@@ -17,10 +17,8 @@ const LogInForm = ({ navigate }) => {
     });
 
     if (response.status !== 201) {
-      console.log("yay");
       navigate("/login");
     } else {
-      console.log("oop");
       let data = await response.json();
 
       // Stores token and user_id in users local storage (if app is refreshed token is still accessible)

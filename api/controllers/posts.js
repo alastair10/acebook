@@ -1,6 +1,5 @@
 const Post = require("../models/post");
 const TokenGenerator = require("../models/token_generator");
-const { post } = require("../routes/posts");
 
 /**
  * Actions for Posts
