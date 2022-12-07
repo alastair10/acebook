@@ -1,3 +1,11 @@
+.Link {
+  color: #3d587a;
+  font-size: 1.1em;
+  margin: 0 0 5px;
+  border: none;
+  padding: 1px;
+}
+
 .post {
   min-width: 350px;
   width: 50vw;
