@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'
 import './Profile.css';
 import ProfileFeed from './ProfileFeed'
+import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 
 const Profile = ({ navigate }) => {
 
@@ -41,19 +42,21 @@ const Profile = ({ navigate }) => {
   return (
     
     <div className="container">
+      <div className="bio">
       <img
           className='user-pic'
           alt='user-pic'
           src={userProfilePic}
         />
-      <h2>{userName}'s Profile</h2>
-      <p>Hometown: {userHomeTown}</p>
-      <p>Bio: {userBio}</p>
-      <p>Birthday: {userBirthday}</p>
-      <p>Occupation: {userOccupation}</p>
-      <p>Relationship Status: {userRelationshipStatus}</p>
-      <p>Join date: {userJoinedDate}</p>
-      <ProfileFeed user_id={id} userName={userName}  />
+        <h2>{userName}'s Profile</h2>
+        <p><strong>Hometown:</strong> {userHomeTown}</p>
+        <p><strong>Bio:</strong> {userBio}</p>
+        <p><strong>Birthday:</strong> {userBirthday}</p>
+        <p><strong>Occupation:</strong> {userOccupation}</p>
+        <p><strong>Relationship Status:</strong> {userRelationshipStatus}</p>
+        <p><strong>Joined Acebook:</strong> {userJoinedDate}</p>
+      </div>
+      <ProfileFeed user_id={id} />
     </div>
   );
 } 
