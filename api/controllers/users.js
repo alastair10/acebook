@@ -40,7 +40,7 @@ const UsersController = {
     if (data.type === "friends") {
       user = await User.findByIdAndUpdate(
         { _id: id },
-        { $addToSet: { friends: data.friends } },
+        { $addToSet: { friends: data.user_id } },
         { new: true }
       );
     }

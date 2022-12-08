@@ -4,7 +4,7 @@ import './Profile.css';
 import ProfileFeed from './ProfileFeed'
 
 const Profile = ({ navigate }) => {
-
+  const user_id = window.localStorage.getItem("user_id");
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [userProfilePic, setUserProfilePic] = useState('');
   const [userName, setUserName] = useState('');
@@ -15,6 +15,25 @@ const Profile = ({ navigate }) => {
   const [userOccupation, setUserOccupation] = useState('');
   const [userJoinedDate, setUserJoinedDate] = useState('');
   const { id } = useParams();
+
+  const handleFriendClick = async () => {
+    if (user_id) {
+      let response = await fetch(`/users/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify({type: "friends", user_id})
+      });
+
+      const data = await response.json();
+
+      if (response.status !== 202) {
+        console.log(data.error);
+      } 
+    }
+  }
 
   useEffect(() => {
     if (id) {
@@ -47,6 +66,7 @@ const Profile = ({ navigate }) => {
           src={userProfilePic}
         />
       <h2>{userName}'s Profile</h2>
+      <button className="btn-details" onClick={handleFriendClick}>Add Friend</button>
       <p>Hometown: {userHomeTown}</p>
       <p>Bio: {userBio}</p>
       <p>Birthday: {userBirthday}</p>
