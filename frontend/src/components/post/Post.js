@@ -10,7 +10,7 @@ const Post = ({ post, callback }) => {
   /*in CSS we have 2 classes to button, and here we can
    *change class every time then click the button
    */
-  const btnClassName = details ? "post-full-text" : "post-less-text";
+  // 
 
   // postman for making posts
 
@@ -52,6 +52,30 @@ const Post = ({ post, callback }) => {
     setComment(event.target.value)
   }
 
+  const messageFilter = (message) => {
+    const button = (          
+      <>         
+        <button
+          className="btn-message"
+          onClick={() => setDetails((prev) => !prev)}
+        >
+          {details ? "Show less" : "Show more"}
+        </button>
+      </>
+    );
+    if (post.message.split(' ').length >= 30) {
+      let formatted = message.split(' ').slice(0, 30).join(' ');
+      return (
+        <>
+        {details ? message + ' ' : formatted + '... '}
+        {button}
+        </>
+      );
+    } else {
+      return message;
+    }
+  }
+
   return (
     <div className="post">
       {/* post section start
@@ -79,8 +103,8 @@ const Post = ({ post, callback }) => {
         </div>
       </div>
       <div className="post-body">
-        <article className={btnClassName} data-cy="post" key={post._id}>
-          {post.message}
+        <article className="post-message" data-cy="post" key={post._id}>
+          {messageFilter(post.message)}
         </article>
       </div>
       <div className="post-footer">
@@ -95,14 +119,6 @@ const Post = ({ post, callback }) => {
         </button> */}
 
         {/* .show button only if length more then 4 lines of text */}
-        {post.message.length > 390 && (
-          <button
-            className="btn-details"
-            onClick={() => setDetails((prev) => !prev)}
-          >
-            {details ? "Show less..." : "Show more..."}
-          </button>
-        )}
       </div>
 
       <div>
