@@ -54,7 +54,7 @@
 .post-body {
   margin: 10px 25px;
   color: #2a425e;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .post-less-text {
@@ -77,9 +77,9 @@
   height: 30px;
   padding: 5px 25px;
   display: flex;
+  gap: 5px;
   align-items: center;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 0.80em;
 }
 
 .btn-message {
@@ -89,12 +89,11 @@
   color: #57769a;
 }
 
-
 .img_likes {
   max-width: 100%;
   width: 20px;
 }
 
 .btn-message:hover {
-  color:#2a425e;
+  color: #2a425e;
 }
