@@ -7,8 +7,8 @@ const router = express.Router();
 // import users controller (which contains user methods)
 const UsersController = require("../controllers/users");
 
-// route equivalent to POST /users/
 router.post("/", UsersController.Create);
 router.get("/:id", UsersController.Get);
+router.patch("/:id", UsersController.Update);
 
 module.exports = router;
