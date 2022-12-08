@@ -12,6 +12,9 @@ const Post = ({ post, callback }) => {
   const [isLiked, toggleIsLiked] = useState(isPostLikedByUser);
   const [comments, setComment] = useState("");
 
+  // const [likes, toggleLikes] = useState(false);
+
+
   const btnClassName = details ? "post-full-text" : "post-less-text";
 
   const handleLikeToggle = async () => {
@@ -58,6 +61,30 @@ const Post = ({ post, callback }) => {
     setComment(event.target.value)
   }
 
+  const messageFilter = (message) => {
+    const button = (          
+      <>         
+        <button
+          className="btn-message"
+          onClick={() => setDetails((prev) => !prev)}
+        >
+          {details ? "Show less" : "Show more"}
+        </button>
+      </>
+    );
+    if (post.message.split(' ').length >= 30) {
+      let formatted = message.split(' ').slice(0, 30).join(' ');
+      return (
+        <>
+        {details ? message + ' ' : formatted + '... '}
+        {button}
+        </>
+      );
+    } else {
+      return message;
+    }
+  }
+
   return (
     <div className="post">
       <div className="post-header">
@@ -77,8 +104,8 @@ const Post = ({ post, callback }) => {
         </div>
       </div>
       <div className="post-body">
-        <article className={btnClassName} data-cy="post" key={post._id}>
-          {post.message}
+        <article className="post-message" data-cy="post" key={post._id}>
+          {messageFilter(post.message)}
         </article>
       </div>
       <div className="post-footer">
@@ -98,14 +125,6 @@ const Post = ({ post, callback }) => {
           )}
         </button>
         <span>{post.likes.length}</span>
-        {post.message.length > 390 && (
-          <button
-            className="btn-details"
-            onClick={() => setDetails((prev) => !prev)}
-          >
-            {details ? "Show less..." : "Show more..."}
-          </button>
-        )}
       </div>
 
       <div>

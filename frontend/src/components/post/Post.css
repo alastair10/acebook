@@ -54,7 +54,7 @@
 .post-body {
   margin: 10px 25px;
   color: #2a425e;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .post-less-text {
@@ -69,20 +69,24 @@
   height: auto;
 }
 
+.post-message {
+  word-wrap: break-word;
+}
+
 .post-footer {
   height: 30px;
   padding: 5px 25px;
   display: flex;
+  gap: 5px;
   align-items: center;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 0.80em;
 }
 
-.btn-details {
+.btn-message {
+  font-size: 0.9em;
+  display: contents;
   border: none;
-  border-radius: 25px;
-  color: #2a425e;
-  text-align: right;
+  color: #57769a;
 }
 
 .img_likes {
@@ -90,7 +94,6 @@
   width: 20px;
 }
 
-.btn-details:hover {
-  background-color: #2a425e;
-  color: snow;
+.btn-message:hover {
+  color: #2a425e;
 }
