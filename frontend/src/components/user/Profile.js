@@ -14,6 +14,7 @@ const Profile = ({ navigate }) => {
   const [userRelationshipStatus, setUserRelationshipStatus] = useState('');
   const [userOccupation, setUserOccupation] = useState('');
   const [userJoinedDate, setUserJoinedDate] = useState('');
+  const [userFriends, setUserFriends] = useState([]);
   const { id } = useParams();
 
   const handleFriendClick = async () => {
@@ -51,6 +52,7 @@ const Profile = ({ navigate }) => {
           setUserRelationshipStatus(data.relationship_status)
           setUserOccupation(data.occupation)
           setUserJoinedDate(data.joined)
+          setUserFriends(data.friends)
           window.localStorage.setItem("token", data.token)
           setToken(window.localStorage.getItem("token"))
         })
@@ -68,7 +70,8 @@ const Profile = ({ navigate }) => {
       <h2>{userName}'s Profile</h2>
     
       {user_id !== id && <button className="btn-details" onClick={handleFriendClick}>Add Friend</button>}
-
+      
+      <p>{userFriends.length} {userFriends.length === 1 ? "friend" : "friends" }</p>
       <p>Hometown: {userHomeTown}</p>
       <p>Bio: {userBio}</p>
       <p>Birthday: {userBirthday}</p>
