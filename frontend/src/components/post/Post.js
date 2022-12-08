@@ -4,44 +4,50 @@ import formatDistanceToNow from "date-fns/formatDistanceToNow";
 import { Link } from "react-router-dom";
 
 const Post = ({ post, callback }) => {
+  const user_id = window.localStorage.getItem("user_id");
+  const token = window.localStorage.getItem("token");
+
   const [details, setDetails] = useState(false);
+  const isPostLikedByUser = post.likes.includes(user_id);
+  const [isLiked, toggleIsLiked] = useState(isPostLikedByUser);
   const [comments, setComment] = useState("");
-  // const [likes, toggleLikes] = useState(false);
-  /*in CSS we have 2 classes to button, and here we can
-   *change class every time then click the button
-   */
+
   const btnClassName = details ? "post-full-text" : "post-less-text";
 
-  // postman for making posts
-
-  // create a user email and password
-  // returns user_id and token (e.g.something like 234t514tq4t.4tq4t3q4tqqt.q4tqwt3t4qwt)
-
-  // then login with these details
-
-  // POST /posts send req.body {message: ?}
-  // returns {message: ok, token: token}
-
-  const handleClick = async () => {
-    // If there's a token, fetches posts with token for authorization
-    const user_id = window.localStorage.getItem("user_id");
-    const token = window.localStorage.getItem("token");
+  const handleLikeToggle = async () => {
+    toggleIsLiked((prevState) => !prevState);
 
     if (user_id) {
-      console.log(post._id);
       let response = await fetch(`/posts/${post._id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ likes: user_id, comments: comments })
+        body: JSON.stringify({ type: "likes", isLiked, user_id }),
       });
       const data = await response.json();
       if (response.status !== 202) {
-        // const data = await response.json()
         console.log(data.error);
-        // console.log("error with post adding")
+      } else {
+        callback(true);
+      }
+    }
+  };
+
+  const handleCommentSubmit = async () => {
+    if (user_id) {
+      let response = await fetch(`/posts/${post._id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ type: "comments", comments })
+      });
+      const data = await response.json();
+      if (response.status !== 202) {
+        console.log(data.error);
       } else {
         callback(true);
       }
@@ -54,13 +60,6 @@ const Post = ({ post, callback }) => {
 
   return (
     <div className="post">
-      {/* post section start
-       * each post inclide:
-       * header: user icon, user name (w/link to profile) and timestamp,
-       * body: article with post text,
-       * footer: likes and comments buttons
-       * comments block after footer
-       */}
       <div className="post-header">
         <img
           className='user-icon'
@@ -72,7 +71,6 @@ const Post = ({ post, callback }) => {
           <Link className="Link" to={"/users/" + post.user_id._id}>
             {post.user_id.full_name}
           </Link>
-          {/* npm package used to format the date/time */}
           <label>
             {formatDistanceToNow(new Date(post.createdAt), { addSuffix: true })}
           </label>
@@ -84,17 +82,22 @@ const Post = ({ post, callback }) => {
         </article>
       </div>
       <div className="post-footer">
-        <span>Likes: {post.likes.length} </span>
-        <button className="btn-details" onClick={handleClick}>
-          Like
+        <button className="btn-details" onClick={handleLikeToggle}>
+          {isLiked ? (
+            <img
+              className="img_likes"
+              src="../heart_full.svg"
+              alt="full heart"
+            />
+          ) : (
+            <img
+              className="img_likes"
+              src="../heart_empty.svg"
+              alt="empty heart"
+            />
+          )}
         </button>
-        <br></br>
-        <span>Comments: {post.comments.length} </span>
-        {/* <button className='btn-details' onClick={handleClick}>
-          View Comments
-        </button> */}
-
-        {/* .show button only if length more then 4 lines of text */}
+        <span>{post.likes.length}</span>
         {post.message.length > 390 && (
           <button
             className="btn-details"
@@ -106,7 +109,7 @@ const Post = ({ post, callback }) => {
       </div>
 
       <div>
-        <form className='post-body' onSubmit={handleClick}>
+        <form className='post-body' onSubmit={handleCommentSubmit}>
           <input
             placeholder="Post a comment!"
             id="comments"
