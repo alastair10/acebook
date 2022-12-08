@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./Post.css";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 import { Link } from "react-router-dom";
 
@@ -11,11 +10,6 @@ const Post = ({ post, callback }) => {
   const isPostLikedByUser = post.likes.includes(user_id);
   const [isLiked, toggleIsLiked] = useState(isPostLikedByUser);
   const [comments, setComment] = useState("");
-
-  // const [likes, toggleLikes] = useState(false);
-
-
-  const btnClassName = details ? "post-full-text" : "post-less-text";
 
   const handleLikeToggle = async () => {
     toggleIsLiked((prevState) => !prevState);
@@ -95,7 +89,7 @@ const Post = ({ post, callback }) => {
         />
 
         <div className="post-header-info">
-          <Link className="Link" to={"/users/" + post.user_id._id}>
+          <Link className="link-profile" to={"/users/" + post.user_id._id}>
             {post.user_id.full_name}
           </Link>
           <label>
@@ -127,19 +121,17 @@ const Post = ({ post, callback }) => {
         <span>{post.likes.length}</span>
       </div>
 
-      <div>
-        <form className='post-body' onSubmit={handleCommentSubmit}>
-          <input
-            placeholder="Post a comment!"
-            id="comments"
-            type="text"
-            value={comments}
-            onChange={handleCommentChange}
-          />
-          <input id="submit" type="submit" value="Comment" />
-        </form>
-      </div>
-
+      <form className='post-body' onSubmit={handleCommentSubmit}>
+        <input
+          placeholder="Post a comment!"
+          id="comments"
+          type="text"
+          value={comments}
+          onChange={handleCommentChange}
+        />
+        <input id="submit" type="submit" value="Comment" />
+      </form>
+      
       <div className='post-body'>
         <article>
           {post.comments.map((item) => <div>{item}</div>)}
