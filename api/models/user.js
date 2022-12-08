@@ -16,7 +16,8 @@ const UserSchema = new mongoose.Schema({
   birthday: { type: Date, required: true },
   hometown: { type: String, required: true },
   occupation: { type: String, required: true },
-  relationship_status: { type: String, required: true }
+  relationship_status: { type: String, required: true },
+  friends: { type: Array, default: [], required: false }
 }, {timestamps: true });
 
 /**
