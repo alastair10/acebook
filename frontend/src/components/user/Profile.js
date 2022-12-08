@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'
+import './Profile.css';
 import ProfileFeed from './ProfileFeed'
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 
 const Profile = ({ navigate }) => {
 
   const [token, setToken] = useState(window.localStorage.getItem("token"));
+  const [userProfilePic, setUserProfilePic] = useState('');
   const [userName, setUserName] = useState('');
   const [userHomeTown, setUserHomeTown] = useState('');
   const [userBio, setUserBio] = useState('');
@@ -23,6 +25,7 @@ const Profile = ({ navigate }) => {
         }
       }).then(response => response.json())
         .then((data) => {
+          setUserProfilePic(data.profile_pic)
           setUserName(data.full_name)
           setUserHomeTown(data.hometown)
           setUserBio(data.bio)
@@ -37,8 +40,14 @@ const Profile = ({ navigate }) => {
   }, [id])
 
   return (
+    
     <div className="container">
       <div className="bio">
+      <img
+          className='user-pic'
+          alt='user-pic'
+          src={userProfilePic}
+        />
         <h2>{userName}'s Profile</h2>
         <p><strong>Hometown:</strong> {userHomeTown}</p>
         <p><strong>Bio:</strong> {userBio}</p>
@@ -47,7 +56,7 @@ const Profile = ({ navigate }) => {
         <p><strong>Relationship Status:</strong> {userRelationshipStatus}</p>
         <p><strong>Joined Acebook:</strong> {userJoinedDate}</p>
       </div>
-      <ProfileFeed user_id={id} userName={userName}  />
+      <ProfileFeed user_id={id} />
     </div>
   );
 } 

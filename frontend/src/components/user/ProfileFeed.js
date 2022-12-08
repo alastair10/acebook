@@ -3,7 +3,7 @@ import Post from '../post/Post'
 import AddPostForm from '../addPostForm/addPostForm';
 import '../feed/Feed.css';
 
-const ProfileFeed = ({ navigate, user_id, userName }) => {
+const ProfileFeed = ({ navigate, user_id }) => {
   const [posts, setPosts] = useState([]);
   const [isUpdated, setIsUpdated] = useState(true)
   // Hook for token variable, retrieves token from users local storage
@@ -19,9 +19,9 @@ const ProfileFeed = ({ navigate, user_id, userName }) => {
       })
         .then(response => response.json())
         .then(async data => {
+          setPosts(data.posts.reverse())
           window.localStorage.setItem("token", data.token)
           setToken(window.localStorage.getItem("token"))
-          setPosts(data.posts.reverse());
           setIsUpdated(false)
         })
     }
@@ -34,9 +34,12 @@ const ProfileFeed = ({ navigate, user_id, userName }) => {
         <h2>Posts</h2>
         <AddPostForm callback = {(value) => {setIsUpdated(value)}}/>
         <div id="feed" role="feed">
-          {posts.filter(post => post.user_id === user_id).map((post) => (
+          {posts.map((post) => (
             <Post post={post} key={post._id} callback = {(value) => {setIsUpdated(value)}} />
           ))}
+          
+          {console.log(posts[0])}
+          {console.log('I AM BEING CALLED')}
         </div>
       </div>
     );
