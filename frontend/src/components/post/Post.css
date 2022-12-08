@@ -69,6 +69,10 @@
   height: auto;
 }
 
+.post-message {
+  word-wrap: break-word;
+}
+
 .post-footer {
   height: 30px;
   padding: 5px 25px;
@@ -78,19 +82,19 @@
   font-size: 0.80em;
 }
 
-.btn-details {
+.btn-message {
+  font-size: 0.9em;
+  display: contents;
   border: none;
-  border-radius: 25px;
-  color: #2a425e;
-  text-align: right;
+  color: #57769a;
 }
+
 
 .img_likes {
   max-width: 100%;
   width: 20px;
 }
 
-.btn-details:hover {
-  background-color: #2a425e;
-  color: snow;
+.btn-message:hover {
+  color:#2a425e;
 }
