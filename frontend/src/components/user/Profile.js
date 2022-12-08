@@ -66,7 +66,9 @@ const Profile = ({ navigate }) => {
           src={userProfilePic}
         />
       <h2>{userName}'s Profile</h2>
-      <button className="btn-details" onClick={handleFriendClick}>Add Friend</button>
+    
+      {user_id !== id && <button className="btn-details" onClick={handleFriendClick}>Add Friend</button>}
+
       <p>Hometown: {userHomeTown}</p>
       <p>Bio: {userBio}</p>
       <p>Birthday: {userBirthday}</p>
