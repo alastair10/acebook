@@ -38,11 +38,19 @@ const UsersController = {
     let user;
 
     if (data.type === "friends") {
-      user = await User.findByIdAndUpdate(
-        { _id: id },
-        { $addToSet: { friends: data.user_id } },
-        { new: true }
-      );
+      if (data.isFriend) {
+        user = await User.findByIdAndUpdate(
+          { _id: id },
+          { $pull: { friends: data.user_id } },
+          { new: true }
+        );
+      } else {
+        user = await User.findByIdAndUpdate(
+          { _id: id },
+          { $addToSet: { friends: data.user_id } },
+          { new: true }
+        );
+      }
     }
     // TODO: error: if same then post will return the same info
     const token = await TokenGenerator.jsonwebtoken(req.user_id);

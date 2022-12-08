@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import './Profile.css';
 import ProfileFeed from './ProfileFeed'
 
-const Profile = ({ navigate }) => {
+const Profile = ({ navigate, callback }) => {
   const user_id = window.localStorage.getItem("user_id");
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [userProfilePic, setUserProfilePic] = useState('');
@@ -15,7 +15,9 @@ const Profile = ({ navigate }) => {
   const [userOccupation, setUserOccupation] = useState('');
   const [userJoinedDate, setUserJoinedDate] = useState('');
   const [userFriends, setUserFriends] = useState([]);
-  const [isUpdated, setIsUpdated] = useState(true)
+  const [isUpdated, setIsUpdated] = useState(true);
+  const isFriendOfUser = userFriends.includes(user_id)
+  const [isFriend, toggleIsFriend] = useState(isFriendOfUser);
   const { id } = useParams();
 
   useEffect(() => {
@@ -40,9 +42,11 @@ const Profile = ({ navigate }) => {
           setIsUpdated(false)
         })
     }
-  }, [id, token])
+  }, [id, token, isUpdated])
 
   const handleFriendClick = async () => {
+    toggleIsFriend((prevState) => !prevState);
+
     if (user_id) {
       let response = await fetch(`/users/${id}`, {
         method: "PATCH",
@@ -50,14 +54,16 @@ const Profile = ({ navigate }) => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`
         },
-        body: JSON.stringify({type: "friends", user_id})
+        body: JSON.stringify({type: "friends", isFriend, user_id})
       });
 
       const data = await response.json();
 
       if (response.status !== 202) {
         console.log(data.error);
-      } 
+      } else {
+        setIsUpdated(true);
+      }
     }
   }
 
@@ -71,7 +77,9 @@ const Profile = ({ navigate }) => {
         />
       <h2>{userName}'s Profile</h2>
     
-      {user_id !== id && <button className="btn-details" onClick={handleFriendClick}>Add Friend</button>}
+      {user_id !== id && <button className="btn-details" onClick={handleFriendClick}>
+        {isFriend ? "Remove Friend" : "Add Friend" } 
+        </button>}
       
       <p>{userFriends.length} {userFriends.length === 1 ? "friend" : "friends" }</p>
       <p>Hometown: {userHomeTown}</p>
