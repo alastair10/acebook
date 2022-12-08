@@ -15,7 +15,32 @@ const Profile = ({ navigate }) => {
   const [userOccupation, setUserOccupation] = useState('');
   const [userJoinedDate, setUserJoinedDate] = useState('');
   const [userFriends, setUserFriends] = useState([]);
+  const [isUpdated, setIsUpdated] = useState(true)
   const { id } = useParams();
+
+  useEffect(() => {
+    if (id && (isUpdated)) {
+      fetch("/users/" + id, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }).then(response => response.json())
+        .then((data) => {
+          setUserProfilePic(data.profile_pic)
+          setUserName(data.full_name)
+          setUserHomeTown(data.hometown)
+          setUserBio(data.bio)
+          setUserBirthday(data.birthday)
+          setUserRelationshipStatus(data.relationship_status)
+          setUserOccupation(data.occupation)
+          setUserJoinedDate(data.joined)
+          setUserFriends(data.friends)
+          window.localStorage.setItem("token", data.token)
+          setToken(window.localStorage.getItem("token"))
+          setIsUpdated(false)
+        })
+    }
+  }, [id, token])
 
   const handleFriendClick = async () => {
     if (user_id) {
@@ -35,29 +60,6 @@ const Profile = ({ navigate }) => {
       } 
     }
   }
-
-  useEffect(() => {
-    if (id) {
-      fetch("/users/" + id, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      }).then(response => response.json())
-        .then((data) => {
-          setUserProfilePic(data.profile_pic)
-          setUserName(data.full_name)
-          setUserHomeTown(data.hometown)
-          setUserBio(data.bio)
-          setUserBirthday(data.birthday)
-          setUserRelationshipStatus(data.relationship_status)
-          setUserOccupation(data.occupation)
-          setUserJoinedDate(data.joined)
-          setUserFriends(data.friends)
-          window.localStorage.setItem("token", data.token)
-          setToken(window.localStorage.getItem("token"))
-        })
-    }
-  }, [id])
 
   return (
     

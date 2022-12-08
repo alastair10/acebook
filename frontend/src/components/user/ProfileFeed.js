@@ -27,6 +27,7 @@ const ProfileFeed = ({ navigate, user_id, userName }) => {
     }
   }, [token, posts, isUpdated])
 
+
   // Component block for feed of posts if there's a token (otherwise redirects to /signin)
   if (token) {
     return (
