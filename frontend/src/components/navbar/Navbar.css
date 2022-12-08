@@ -1,4 +1,4 @@
-button {
+button.link {
   border: none;
   margin: 0;
   padding: 0;
@@ -10,7 +10,7 @@ button {
   line-height: normal;
 }
 
-button,
+button.link,
 a,
 .link {
   text-decoration: none;

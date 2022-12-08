@@ -16,7 +16,7 @@
 }
 
 .post-header {
-  background-color: #D9D9D9;
+  background-color: #d9d9d9;
   height: 20%;
   border-radius: 25px 25px 0 0;
   display: flex;
@@ -54,15 +54,15 @@
 .post-body {
   margin: 10px 25px;
   color: #2a425e;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .post-less-text {
-	overflow: hidden;
-	text-overflow: ellipsis;
-	display: -webkit-box;
-	-webkit-line-clamp: 4;
-	-webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
 }
 
 .post-full-text {
@@ -76,6 +76,8 @@
 .post-footer {
   height: 30px;
   padding: 5px 25px;
+  display: flex;
+  align-items: center;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 0.80em;
 }
@@ -85,6 +87,12 @@
   display: contents;
   border: none;
   color: #57769a;
+}
+
+
+.img_likes {
+  max-width: 100%;
+  width: 20px;
 }
 
 .btn-message:hover {

@@ -1,6 +1,5 @@
 const Post = require("../models/post");
 const TokenGenerator = require("../models/token_generator");
-const { post } = require("../routes/posts");
 
 /**
  * Actions for Posts
@@ -11,7 +10,7 @@ const PostsController = {
   Index: (req, res) => {
     // use the post schema with find query **What is sent?**
     Post.find({})
-      .populate({ path :'user_id', select : 'full_name profile_pic'})
+      .populate({ path: "user_id", select: "full_name profile_pic" })
       .exec(async (err, posts) => {
         if (err) {
           throw err;
@@ -45,7 +44,29 @@ const PostsController = {
     const data = req.body;
     // the post id
     const { id } = req.params;
-    const post = await Post.findByIdAndUpdate({"_id": id}, {$addToSet: { likes: data.likes, comments: data.comments} }, {new: true});
+    let post;
+    if (data.type === "likes") {
+      if (data.isLiked) {
+        post = await Post.findByIdAndUpdate(
+          { _id: id },
+          { $pull: { likes: data.user_id } },
+          { new: true }
+        );
+      } else {
+        post = await Post.findByIdAndUpdate(
+          { _id: id },
+          { $addToSet: { likes: data.user_id } },
+          { new: true }
+        );
+      }
+    }
+    if (data.type === "comments") {
+      post = await Post.findByIdAndUpdate(
+        { _id: id },
+        { $addToSet: { comments: data.comments } },
+        { new: true }
+      );
+    }
     // TODO: error: if same then post will return the same info
     const token = await TokenGenerator.jsonwebtoken(req.user_id);
     res.status(202).json({ message: "OK", token: token, post: post });
@@ -57,7 +78,7 @@ const PostsController = {
     const post = await Post.findById(id);
     const token = await TokenGenerator.jsonwebtoken(req.user_id);
     res.status(200).json({ message: "OK", token: token, post: post });
-  }
+  },
 };
 
 module.exports = PostsController;
