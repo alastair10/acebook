@@ -124,9 +124,6 @@ const Post = ({ post, callback }) => {
             />
           )}
         </button>
-
-        <br></br>
-        <span>Comments: {post.comments.length} </span>
         <span>{post.likes.length}</span>
       </div>
 
