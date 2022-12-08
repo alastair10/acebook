@@ -27,7 +27,6 @@ const ProfileFeed = ({ navigate, user_id, userName }) => {
     }
   }, [token, posts, isUpdated])
 
-
   // Component block for feed of posts if there's a token (otherwise redirects to /signin)
   if (token) {
     return (
@@ -35,7 +34,7 @@ const ProfileFeed = ({ navigate, user_id, userName }) => {
         <h2>Posts</h2>
         <AddPostForm callback = {(value) => {setIsUpdated(value)}}/>
         <div id="feed" role="feed">
-          {posts.filter(post => post.user_id === user_id).map((post) => (
+          {posts.filter(post => post.user_id._id === user_id).map((post) => (
             <Post post={post} key={post._id} callback = {(value) => {setIsUpdated(value)}} />
           ))}
         </div>
