@@ -29,6 +29,24 @@ const UsersController = {
     const token = await TokenGenerator.jsonwebtoken(req.user_id);
     res.status(200).json({ message: "OK", token: token, full_name: user.full_name, bio: user.bio, birthday: user.birthday, hometown: user.hometown, occupation: user.occupation, relationship_status: user.relationship_status, joined: user.createdAt, profile_pic: user.profile_pic
   })
+  },
+
+  Update: async (req, res) => {
+    const data = req.body;
+    // the user id
+    const { id } = req.params;
+    let user;
+
+    if (data.type === "friends") {
+      user = await User.findByIdAndUpdate(
+        { _id: id },
+        { $addToSet: { friends: data.friends } },
+        { new: true }
+      );
+    }
+    // TODO: error: if same then post will return the same info
+    const token = await TokenGenerator.jsonwebtoken(req.user_id);
+    res.status(202).json({ message: "OK", token: token, user: user });
   }
 };
 

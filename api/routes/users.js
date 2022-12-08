@@ -9,6 +9,6 @@ const UsersController = require("../controllers/users");
 
 router.post("/", UsersController.Create);
 router.get("/:id", UsersController.Get);
-router.patch("/:id", UserController.Update);
+router.patch("/:id", UsersController.Update);
 
 module.exports = router;
