@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'
-import './Profile.css';
 import ProfileFeed from './ProfileFeed'
+import formatDistanceToNow from 'date-fns/formatDistanceToNow';
+
 
 const Profile = ({ navigate }) => {
   const [user_id, setUserID] = useState(window.localStorage.getItem("user_id"));
@@ -71,29 +72,30 @@ const Profile = ({ navigate }) => {
   return (
     
     <div className="container">
-      <img
-          className='user-pic'
-          alt='user-pic'
-          src={userProfilePic}
+      <div className="bio">
+        <img
+            className='user-pic'
+            alt='user-pic'
+            src={userProfilePic}
         />
-      <h2>{userName}'s Profile</h2>
-    
-      {user_id !== id && <button className="btn-details" onClick={handleFriendClick}>
-        {isFriend ? "Remove Friend" : "Add Friend" } 
-        </button>}
-      
-      <p>{userFriends.length} {userFriends.length === 1 ? "friend" : "friends" }</p>
-      <p>Hometown: {userHomeTown}</p>
-      <p>Bio: {userBio}</p>
-      <p>Birthday: {userBirthday}</p>
-      <p>Occupation: {userOccupation}</p>
-      <p>Relationship Status: {userRelationshipStatus}</p>
-      <p>Join date: {userJoinedDate}</p>
-      <ProfileFeed user_id={id} userName={userName}  />
+        <h2>{userName}'s Profile</h2>
+
+        {user_id !== id && <button className="btn-details" onClick={handleFriendClick}>
+          {isFriend ? "Remove Friend" : "Add Friend" } 
+          </button>}
+
+        <p>{userFriends.length} {userFriends.length === 1 ? "friend" : "friends" }</p>
+        <p><strong>Hometown:</strong> {userHomeTown}</p>
+        <p><strong>Bio:</strong> {userBio}</p>
+        <p><strong>Birthday:</strong> {userBirthday}</p>
+        <p><strong>Occupation:</strong> {userOccupation}</p>
+        <p><strong>Relationship Status:</strong> {userRelationshipStatus}</p>
+        <p><strong>Joined Acebook:</strong> {userJoinedDate}</p>
+      </div>
+      <ProfileFeed user_id={id} />
     </div>
   );
 } 
-
 
 export default Profile;
 

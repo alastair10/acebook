@@ -1,4 +1,3 @@
-import './App.css';
 import NavBar from '../navbar/Navbar';
 import LoginForm from '../auth/LoginForm';
 import SignUpForm from '../user/SignUpForm';

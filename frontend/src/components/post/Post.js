@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./Post.css";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 import { Link } from "react-router-dom";
 
@@ -11,8 +10,6 @@ const Post = ({ post, callback }) => {
   const isPostLikedByUser = post.likes.includes(user_id);
   const [isLiked, toggleIsLiked] = useState(isPostLikedByUser);
   const [comments, setComment] = useState("");
-
-  const btnClassName = details ? "post-full-text" : "post-less-text";
 
   const handleLikeToggle = async () => {
     toggleIsLiked((prevState) => !prevState);
@@ -58,6 +55,30 @@ const Post = ({ post, callback }) => {
     setComment(event.target.value)
   }
 
+  const messageFilter = (message) => {
+    const button = (          
+      <>         
+        <button
+          className="btn-message"
+          onClick={() => setDetails((prev) => !prev)}
+        >
+          {details ? "Show less" : "Show more"}
+        </button>
+      </>
+    );
+    if (post.message.split(' ').length >= 30) {
+      let formatted = message.split(' ').slice(0, 30).join(' ');
+      return (
+        <>
+        {details ? message + ' ' : formatted + '... '}
+        {button}
+        </>
+      );
+    } else {
+      return message;
+    }
+  }
+
   return (
     <div className="post">
       <div className="post-header">
@@ -68,7 +89,7 @@ const Post = ({ post, callback }) => {
         />
 
         <div className="post-header-info">
-          <Link className="Link" to={"/users/" + post.user_id._id}>
+          <Link className="link-profile" to={"/users/" + post.user_id._id}>
             {post.user_id.full_name}
           </Link>
           <label>
@@ -77,8 +98,8 @@ const Post = ({ post, callback }) => {
         </div>
       </div>
       <div className="post-body">
-        <article className={btnClassName} data-cy="post" key={post._id}>
-          {post.message}
+        <article className="post-message" data-cy="post" key={post._id}>
+          {messageFilter(post.message)}
         </article>
       </div>
       <div className="post-footer">
@@ -98,29 +119,19 @@ const Post = ({ post, callback }) => {
           )}
         </button>
         <span>{post.likes.length}</span>
-        {post.message.length > 390 && (
-          <button
-            className="btn-details"
-            onClick={() => setDetails((prev) => !prev)}
-          >
-            {details ? "Show less..." : "Show more..."}
-          </button>
-        )}
       </div>
 
-      <div>
-        <form className='post-body' onSubmit={handleCommentSubmit}>
-          <input
-            placeholder="Post a comment!"
-            id="comments"
-            type="text"
-            value={comments}
-            onChange={handleCommentChange}
-          />
-          <input id="submit" type="submit" value="Comment" />
-        </form>
-      </div>
-
+      <form className='post-body' onSubmit={handleCommentSubmit}>
+        <input
+          placeholder="Post a comment!"
+          id="comments"
+          type="text"
+          value={comments}
+          onChange={handleCommentChange}
+        />
+        <input id="submit" type="submit" value="Comment" />
+      </form>
+      
       <div className='post-body'>
         <article>
           {post.comments.map((item) => <div>{item}</div>)}
