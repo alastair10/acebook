@@ -3,8 +3,9 @@ import { useParams } from 'react-router-dom'
 import ProfileFeed from './ProfileFeed'
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 
-const Profile = () => {
-  const user_id = window.localStorage.getItem("user_id");
+
+const Profile = ({ navigate }) => {
+  const [user_id, setUserID] = useState(window.localStorage.getItem("user_id"));
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [userProfilePic, setUserProfilePic] = useState('');
   const [userName, setUserName] = useState('');
@@ -16,12 +17,12 @@ const Profile = () => {
   const [userJoinedDate, setUserJoinedDate] = useState('');
   const [userFriends, setUserFriends] = useState([]);
   const [isUpdated, setIsUpdated] = useState(true);
-  const isFriendOfUser = userFriends.includes(user_id)
+  const isFriendOfUser = userFriends.includes(user_id);
   const [isFriend, toggleIsFriend] = useState(isFriendOfUser);
   const { id } = useParams();
 
   useEffect(() => {
-    if (id && (isUpdated)) {
+    if (isUpdated) {
       fetch("/users/" + id, {
         headers: {
           Authorization: `Bearer ${token}`
@@ -39,10 +40,11 @@ const Profile = () => {
           setUserFriends(data.friends)
           window.localStorage.setItem("token", data.token)
           setToken(window.localStorage.getItem("token"))
-          setIsUpdated(false)
+          setUserID(window.localStorage.getItem("user_id"))
+          setIsUpdated(false);
         })
     }
-  }, [id, token, isUpdated])
+  }, [id, isUpdated])
 
   const handleFriendClick = async () => {
     toggleIsFriend((prevState) => !prevState);
