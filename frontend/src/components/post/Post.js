@@ -32,16 +32,22 @@ const Post = ({ post, callback }) => {
     }
   };
 
-  const handleCommentSubmit = async () => {
-    if (user_id) {
+  const handleCommentSubmit = async (event) => { 
+    event.preventDefault();
+    if (user_id && comments !== "") {
+
+      const {format} = require('date-fns')
+      let date = format(new Date(), 'dd.MM.yy');
+      let time = format(new Date(), 'HH:mm');
+
       let response = await fetch(`/posts/${post._id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ type: "comments", comments })
-      });
+        body: JSON.stringify({ type: "comments", comments: comments + " at " + time + " on " + date })
+        });
       const data = await response.json();
       if (response.status !== 202) {
         console.log(data.error);

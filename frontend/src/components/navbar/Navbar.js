@@ -42,7 +42,7 @@ const navbar = ({ navigate }) => {
   return (
     <nav className='navbar'>
       <div className='logo-container'>
-        <img className='logo' src='./apple-touch-icon.png' alt='Acebook blue card logo' />
+        <img className='logo' src='../apple-touch-icon.png' alt='Acebook blue card logo' />
       </div>
       <div>{buttons}</div>
     </nav>

@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'
 import ProfileFeed from './ProfileFeed'
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
-import format from 'date-fns/format';
-
 
 const Profile = ({ navigate }) => {
   const [user_id, setUserID] = useState(window.localStorage.getItem("user_id"));
@@ -45,7 +43,7 @@ const Profile = ({ navigate }) => {
           setIsUpdated(false);
         })
     }
-  }, [id, isUpdated])
+  }, [id, isUpdated, token])
 
   const handleFriendClick = async () => {
     toggleIsFriend((prevState) => !prevState);
@@ -81,7 +79,7 @@ const Profile = ({ navigate }) => {
         />
         <h2>{userName}'s Profile</h2>
 
-        {user_id !== id && <button className="btn-details" onClick={handleFriendClick}>
+        {user_id !== id && <button className="friend-btn" onClick={handleFriendClick}>
           {isFriend ? "Remove Friend" : "Add Friend" } 
           </button>}
 
@@ -91,7 +89,7 @@ const Profile = ({ navigate }) => {
         <p><strong>Birthday:</strong> {userBirthday}</p>
         <p><strong>Occupation:</strong> {userOccupation}</p>
         <p><strong>Relationship Status:</strong> {userRelationshipStatus}</p>
-        <p><strong>Joined Acebook:</strong>  {userJoinedDate}</p>
+        <p><strong>Joined Acebook:</strong> {userJoinedDate}</p>
       </div>
       <ProfileFeed user_id={id} />
     </div>

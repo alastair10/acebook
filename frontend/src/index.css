@@ -82,6 +82,7 @@ Navbar
   width: 30px;
 }
 
+.friend-btn,
 .link-navbar {
   color: var(--primary);
   font-size: 1.1em;
@@ -90,7 +91,7 @@ Navbar
   display: inline-block;
   padding: 3px 10px;
   font-size: 1.125rem;
-  border: 3px solid transparent;
+  border: 3px solid;
   border-color: var(--secondary);
   border-radius: var(--border-radius);
   margin-left: 10px;
