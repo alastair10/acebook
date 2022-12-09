@@ -32,7 +32,8 @@ const Post = ({ post, callback }) => {
     }
   };
 
-  const handleCommentSubmit = async () => { 
+  const handleCommentSubmit = async (event) => { 
+    event.preventDefault();
     if (user_id && comments !== "") {
 
       const {format} = require('date-fns')
