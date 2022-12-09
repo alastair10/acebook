@@ -141,6 +141,7 @@ Posts
   height: 49px;
   width: 49px;
   border-radius: 50%;
+  /* border: 1px solid var(--text-dark-blue); */
   padding: 1px;
   margin: 2px 10px;
 }
