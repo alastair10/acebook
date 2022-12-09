@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'
 import ProfileFeed from './ProfileFeed'
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
+import format from 'date-fns/format';
 
 
 const Profile = ({ navigate }) => {
@@ -33,10 +34,10 @@ const Profile = ({ navigate }) => {
           setUserName(data.full_name)
           setUserHomeTown(data.hometown)
           setUserBio(data.bio)
-          setUserBirthday(data.birthday)
+          setUserBirthday(data.birthday.slice(0,10).split("-").reverse().join("-"))
           setUserRelationshipStatus(data.relationship_status)
           setUserOccupation(data.occupation)
-          setUserJoinedDate(data.joined)
+          setUserJoinedDate(formatDistanceToNow(new Date(data.joined), { addSuffix: true }))
           setUserFriends(data.friends)
           window.localStorage.setItem("token", data.token)
           setToken(window.localStorage.getItem("token"))
@@ -90,7 +91,7 @@ const Profile = ({ navigate }) => {
         <p><strong>Birthday:</strong> {userBirthday}</p>
         <p><strong>Occupation:</strong> {userOccupation}</p>
         <p><strong>Relationship Status:</strong> {userRelationshipStatus}</p>
-        <p><strong>Joined Acebook:</strong> {userJoinedDate}</p>
+        <p><strong>Joined Acebook:</strong>  {userJoinedDate}</p>
       </div>
       <ProfileFeed user_id={id} />
     </div>
