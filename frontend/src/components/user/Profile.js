@@ -19,9 +19,10 @@ const Profile = ({ navigate }) => {
   const isFriendOfUser = userFriends.includes(user_id);
   const [isFriend, toggleIsFriend] = useState(isFriendOfUser);
   const { id } = useParams();
+  const [lastId, setLast] = useState(id)
 
   useEffect(() => {
-    if (isUpdated) {
+    if (isUpdated || (lastId !== id)) {
       fetch("/users/" + id, {
         headers: {
           Authorization: `Bearer ${token}`
@@ -43,7 +44,7 @@ const Profile = ({ navigate }) => {
           setIsUpdated(false);
         })
     }
-  }, [id, isUpdated, token])
+  }, [id, isUpdated])
 
   const handleFriendClick = async () => {
     toggleIsFriend((prevState) => !prevState);
