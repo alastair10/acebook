@@ -2,9 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'
 import ProfileFeed from './ProfileFeed'
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
-// import { formatDuration } from 'date-fns/formatDuration';
-
-// console.log("2022-12-20T00:00:00.000Z".utc());
+import format from 'date-fns/format';
 
 const Profile = () => {
   const user_id = window.localStorage.getItem("user_id");
