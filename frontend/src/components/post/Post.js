@@ -32,8 +32,8 @@ const Post = ({ post, callback }) => {
     }
   };
 
-  const handleCommentSubmit = async () => {
-    if (user_id) {
+  const handleCommentSubmit = async () => { 
+    if (user_id && comments !== "") {
 
       const {format} = require('date-fns')
       let date = format(new Date(), 'dd.MM.yy');
