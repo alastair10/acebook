@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import Post from '../post/Post'
-import AddPostForm from '../addPostForm/addPostForm';
-import '../feed/Feed.css';
 
 const ProfileFeed = ({ navigate, user_id }) => {
   const [posts, setPosts] = useState([]);

@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'
-import './Profile.css';
 import ProfileFeed from './ProfileFeed'
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 
-const Profile = ({ navigate, callback }) => {
+const Profile = () => {
   const user_id = window.localStorage.getItem("user_id");
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [userProfilePic, setUserProfilePic] = useState('');
