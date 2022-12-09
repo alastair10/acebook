@@ -32,7 +32,6 @@ const ProfileFeed = ({ navigate, user_id, userName }) => {
     return (
       <div className="container">
         <h2>Posts</h2>
-        <AddPostForm callback = {(value) => {setIsUpdated(value)}}/>
         <div id="feed" role="feed">
           {posts.filter(post => post.user_id._id === user_id).map((post) => (
             <Post post={post} key={post._id} callback = {(value) => {setIsUpdated(value)}} />
