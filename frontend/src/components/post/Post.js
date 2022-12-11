@@ -88,12 +88,13 @@ const Post = ({ post, callback }) => {
   return (
     <div className="post">
       <div className="post-header">
-        <img
-          className='user-icon'
-          alt='user-icon'
-          src= {post.user_id.profile_pic}
-        />
-
+        <Link className="link-profile" to={"/users/" + post.user_id._id}>
+          <img
+            className='user-icon'
+            alt='user-icon'
+            src= {post.user_id.profile_pic}
+          />
+        </Link>
         <div className="post-header-info">
           <Link className="link-profile" to={"/users/" + post.user_id._id}>
             {post.user_id.full_name}
