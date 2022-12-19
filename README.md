@@ -33,41 +33,46 @@ See some of the app features and learn about the way the product was built.
 1. Clone the repo
 2. Install Node.js dependencies for both front and backend directories
 
-   ```bash
-   ; cd api
-   ; npm install
-   ; cd ../frontend
-   ; npm install
-   ```
+```
+bash
+cd api
+npm install
+cd ../frontend
+npm install
+```
 
 3. Install MongoDB
 
-   ```bash
-   brew tap mongodb/brew
-   brew install mongodb-community@5.0
-   ```
+```
+bash
+brew tap mongodb/brew
+brew install mongodb-community@5.0
+```
 
 4. Start MongoDB
 
-   ```bash
-   brew services start mongodb-community@5.0
-   ```
+```
+bash
+brew services start mongodb-community@5.0
+```
 
 ### Running
 
 1.  Start the server
 
-    ```bash
-    ; cd api
-    ; JWT_SECRET=SUPER_SECRET npm start
-    ```
+```
+bash
+cd api
+JWT_SECRET=SUPER_SECRET npm start
+```
 
 2.  Start the front end
     In a new terminal session...
 
-        ```bash
-        ; cd frontend
-        ; npm start
-        ```
+```
+bash
+cd frontend
+npm start
+```
 
 You should now be able to open your browser and go to `http://localhost:3000/`
