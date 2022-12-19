@@ -16,9 +16,9 @@ A selection of screenshots
 
 <table>
   <tr>
-    <td>Feed</td>
+    <td>Signup form</td>
+     <td>Feed</td>
      <td>User profile</td>
-     <td>Post details</td>
   </tr>
   <tr>
     <td><img src="screenshots/screenshot_1.png" width=270></td>
