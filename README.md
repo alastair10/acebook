@@ -14,9 +14,18 @@ In this project, six of us were tasked with working on an existing MERN applicat
 
 A selection of screenshots
 
-<img width="200px" src="screenshots/screenshot_1.png" />
-<img width="200px" src="screenshots/screenshot_2.png" />
-<img width="200px" src="screenshots/screenshot_3.png" />
+<table>
+  <tr>
+    <td>Feed</td>
+     <td>User profile</td>
+     <td>Post details</td>
+  </tr>
+  <tr>
+    <td><img src="screenshots/screenshot_1.png" width=270 height=480></td>
+    <td><img src="screenshots/screenshot_2.png" width=270 height=480></td>
+    <td><img src="screenshots/screenshot_3.png" width=270 height=480></td>
+  </tr>
+ </table>
 
 ## Video Runthrough
 
