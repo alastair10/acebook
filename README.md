@@ -21,9 +21,9 @@ A selection of screenshots
      <td>Post details</td>
   </tr>
   <tr>
-    <td><img src="screenshots/screenshot_1.png" width=270 height=480></td>
-    <td><img src="screenshots/screenshot_2.png" width=270 height=480></td>
-    <td><img src="screenshots/screenshot_3.png" width=270 height=480></td>
+    <td><img src="screenshots/screenshot_1.png" width=270></td>
+    <td><img src="screenshots/screenshot_2.png" width=270></td>
+    <td><img src="screenshots/screenshot_3.png" width=270></td>
   </tr>
  </table>
 
