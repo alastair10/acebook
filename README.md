@@ -16,7 +16,7 @@ A selection of screenshots
 
 <table>
   <tr>
-    <td>Signup form</td>
+    <td>Sign up form</td>
      <td>Feed</td>
      <td>User profile</td>
   </tr>
