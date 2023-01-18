@@ -6,7 +6,7 @@ In this project, six of us were tasked with working on an existing MERN applicat
 
 [Screenshots](#screenshots)
 
-[Video Runthrough](#video-runthrough)
+[Video Runthrough of the App](#video-runthrough)
 
 [How to try the project](#how-to-try-the-project)
 
@@ -27,7 +27,7 @@ A selection of screenshots
   </tr>
  </table>
 
-## Video Runthrough
+## Video Runthrough of the App
 
 See some of the app features and learn about the way the product was built.
 
