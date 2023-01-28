@@ -2,11 +2,13 @@
 
 In this project, six of us were tasked with working on an existing MERN application. The challenge was to familiarise ourselves with an unknown codebase with technologies we'd little to no previous experience. We had to improve and extend it into a fully functioning app that we could present to the stakeholders.
 
+<img src="https://media.giphy.com/media/bccp31SVK0Hbc3N2HX/giphy.gif)" width="550">
+
 ## Contents
 
 [Screenshots](#screenshots)
 
-[Video Runthrough of the App](#video-runthrough)
+[Video Runthrough of the App](#video-runthrough-of-the-app)
 
 [How to try the project](#how-to-try-the-project)
 
